@@ -4,7 +4,7 @@ ___In the process of development, I accept your ideas for implementation at this
 ## profile_info() - Returns -  Balance, Active Sales, How Many Sold, Username
 
 ```python
-from tests import Playerok
+from playerok_api import Playerok
 import asyncio
 
 async def main():
@@ -26,7 +26,7 @@ if __name__ == "__main__":
 
 ## messages() - Gets information whether there are new messages - in case there are no messages. The script sends - None
 ```python
-from tests import Playerok
+from playerok_api import Playerok
 import asyncio
 
 async def main():
