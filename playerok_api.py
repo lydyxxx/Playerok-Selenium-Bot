@@ -147,6 +147,44 @@ class Playerok:
             print(f"Ошибка в процессе: {e}")
             await page.screenshot(path="error.png")
             
+    async def new_messages(self, page):
+        await page.goto('https://playerok.com/chats')
+        
+        for i in range(4):
+            await asyncio.sleep(1)
+            print(Fore.GREEN + f"Проверка наличия новых сообщений через {4 - i} секунд" + Style.RESET_ALL)
+        
+        try:
+            await page.wait_for_selector("a.MuiTypography-root.MuiTypography-inherit.MuiLink-root.MuiLink-underlineAlways.mui-style-14yn4ig")
+            chat_elements = await page.query_selector_all("a.MuiTypography-root.MuiTypography-inherit.MuiLink-root.MuiLink-underlineAlways.mui-style-14yn4ig")
+        except Exception as e:
+            print("Чаты не найдены")
+            return None, None
+
+        new_messages_found = False
+        user_name = None
+        chat_link = None
+        
+        for chat in chat_elements:
+            try:
+                user_element = await chat.query_selector("span.MuiTypography-root.MuiTypography-16.mui-style-72w560")
+                message_count_element = await chat.query_selector("span.MuiTypography-root.MuiTypography-12.mui-style-4ghrrg")
+                message_count = int(await message_count_element.inner_text())
+                
+                if message_count > 0:
+                    user_name = await user_element.inner_text()
+                    chat_link = await chat.get_attribute("href")
+                    print(f"Сообщение от пользователя: {user_name}, Количество сообщений: {message_count}, Ссылка: {chat_link}")
+                    new_messages_found = True
+                    await asyncio.sleep(3)
+            except Exception as e:
+                pass
+            
+        if new_messages_found:
+            return user_name, chat_link
+        else:
+            return None, None
+            
     async def loading_cookies(self, cookies_file):
         if not hasattr(self, 'playwright'):
             self.playwright = await async_playwright().start()
