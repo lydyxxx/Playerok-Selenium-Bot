@@ -1,6 +1,8 @@
 # Playerok API(Playwright browser)
 ___В процессе разработки, я принимаю ваши идеи для реализации в данный момент! Вы можете внести предложение в Pull Requests___ 
 
+## Что-бы получить куки с сайта используйте расширение для Google Chrome EditThisCookies - https://chromewebstore.google.com/detail/editthiscookie-v3/ojfebgpkimhlhcblbalbfjblapadhbol
+
 ## profile_info() - Возвращает - баланс, активные продажи, сколько продано, имя пользователя
 
 ```python
