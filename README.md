@@ -1,7 +1,7 @@
 # Playerok API(Playwright browser)
-___In the process of development, I accept your ideas for implementation at this time! You can make a suggestion in Pull Requests___ 
+___В процессе разработки, я принимаю ваши идеи для реализации в данный момент! Вы можете внести предложение в Pull Requests___ 
 
-## profile_info() - Returns -  Balance, Active Sales, How Many Sold, Username
+## profile_info() - Возвращает - баланс, активные продажи, сколько продано, имя пользователя
 
 ```python
 from playerok_api import Playerok
@@ -24,7 +24,7 @@ if __name__ == "__main__":
 
 ```
 
-## messages() - Gets information whether there are new messages - in case there are no messages. The script sends - None
+## messages() - Получает информацию о наличии новых сообщений - в случае отсутствия сообщений. Скрипт отправляет - None
 ```python
 from playerok_api import Playerok
 import asyncio
@@ -45,7 +45,9 @@ if __name__ == "__main__":
 ```
 
 
-## sell() - Exhibits goods according to specified criteria
+## sell() - Выставляет товар по заданым критериям
+if Platno == True - выставляет платно(премиум лот)
+if Platno == False - бесплатно выставляет товар
 ```python
 from playerok_api import Playerok
 import asyncio
@@ -53,13 +55,15 @@ import asyncio
 async def main():
     playerok = Playerok()
     page = await playerok.loading_cookies('cookies.json')
-    await playerok.sell(page, 'Категория', 'подкатегория', 'Название товара', 'Описание товара', 'Цена товара', 'Путь к изображению', 'Ссылка на товар')
+    await playerok.sell(page, 'Категория', 'подкатегория', 'Название товара', 'Описание товара', 'Цена товара', 'Путь к изображению', 'Товарное описание при продаже', Platno=False)
     await playerok.close()
 
     
 
 if __name__ == "__main__":
     result = asyncio.run(main())
+
+
 
 ```
 # DON`T READ TAGS !!!!!!!
