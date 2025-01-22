@@ -189,7 +189,7 @@ class Playerok:
         if not hasattr(self, 'playwright'):
             self.playwright = await async_playwright().start()
         
-        self.browser = await self.playwright.webkit.launch(headless=False)
+        self.browser = await self.playwright.webkit.launch(headless=True)
         page = await self.browser.new_page()
         await stealth_async(page)
             
